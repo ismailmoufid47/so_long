@@ -7,6 +7,8 @@ LFLAGS = -L MLX42/build -L /Users/isel-mou/.brew/opt/glfw/lib -L libft -l mlx42 
 
 MLX = MLX42/build/libmlx42.a
 
+LIBFT = libft/libft.a 
+
 SRC = so_long.c draw.c character.c walls_floors_and_move_count.c parse_map.c validate_map.c map_utils.c
 
 SRC_BONUS = so_long_bonus.c exit_bonus.c enemy_bonus.c draw_bonus.c character.c walls_floors_and_move_count.c \
@@ -14,16 +16,16 @@ SRC_BONUS = so_long_bonus.c exit_bonus.c enemy_bonus.c draw_bonus.c character.c 
 
 all: $(NAME)
 
-$(NAME): $(MLX) libft/libft.a $(SRC)
+$(NAME): $(MLX) $(LIBFT) $(SRC)
 	$(CC) $(CFLAGS) $(SRC) $(LFLAGS) -o $(NAME)
 
-bonus: $(MLX) libft/libft.a $(SRC_BONUS)
+bonus: $(MLX) $(LIBFT) $(SRC_BONUS)
 	$(CC) $(CFLAGS) $(SRC_BONUS) $(LFLAGS) -o $(NAME)
 
 $(MLX):
 	make -C MLX42/build
 
-libft/libft.a:
+$(LIBFT):
 	make -C libft
 
 clean:
